@@ -1,6 +1,7 @@
 package Server.Receiver.Channels.Shift;
 
 import Database.Dto.ShiftDTO;
+import Database.Implementation.ShiftDao;
 import Server.Receiver.Interfaces.IQueue;
 import Server.Receiver.MQConfig;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -83,6 +84,8 @@ public class CreateShift implements IQueue {
                     ObjectMapper mapper = new ObjectMapper();
                     ShiftDTO shift = mapper.readValue(message,ShiftDTO.class);
 
+                    ShiftDao shiftDao = ShiftDao.getInstance();
+                    shiftDao.CreateShift(shift);
 
                 };
                 channel.basicConsume(Queue, true, deliverCallback, consumerTag -> {

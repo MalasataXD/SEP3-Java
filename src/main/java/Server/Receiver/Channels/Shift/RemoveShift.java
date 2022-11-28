@@ -1,5 +1,6 @@
 package Server.Receiver.Channels.Shift;
 
+import Database.Implementation.ShiftDao;
 import Server.Receiver.Interfaces.IQueue;
 import Server.Receiver.MQConfig;
 import com.rabbitmq.client.Channel;
@@ -82,6 +83,8 @@ public class RemoveShift implements IQueue {
 
                     int shiftId = Integer.parseInt(message);
 
+                    ShiftDao shiftDao = ShiftDao.getInstance();
+                    shiftDao.DeleteShift(shiftId);
 
                 };
                 channel.basicConsume(Queue, true, deliverCallback, consumerTag -> {
