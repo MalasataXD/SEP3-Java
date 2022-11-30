@@ -8,7 +8,5 @@ public class Test {
         Sender sender = Sender.getInstance();
         sender.send(new MessageHeader("localClient1","TEST","oof"));
 
-
-
     }
 }

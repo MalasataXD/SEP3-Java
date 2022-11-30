@@ -3,9 +3,12 @@ package Server.Receiver.Channels.Worker;
 
 import Database.Dto.WorkerDTO;
 import Database.Implementation.WorkerDao;
+import Server.Receiver.Implementations.MessageHeaders.MessageHeader;
 import Server.Receiver.Interfaces.IQueue;
 import Server.Receiver.MQConfig;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectReader;
+import com.fasterxml.jackson.databind.ObjectWriter;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
@@ -78,14 +81,25 @@ public class CreateWorker implements IQueue {
                 DeliverCallback deliverCallback = (consumerTag, delivery) -> {
                     String message = new String(delivery.getBody(), StandardCharsets.UTF_8);
 
-                    System.out.println(" [CreateWorker] Created new worker");
+                    System.out.println(" [CreateWorker] Created new worker " + message);
 
                     ObjectMapper mapper = new ObjectMapper();
-                    WorkerDTO worker = mapper.readValue(message,WorkerDTO.class);
+                    MessageHeader messageHeader = mapper.readValue(message,MessageHeader.class);
 
+                    System.out.println("test1 " + messageHeader.payload);
+
+                    ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+                    String Payload = ow.writeValueAsString(messageHeader.payload);
+                    System.out.println("Json: " + Payload);
+
+                    Object object = mapper.readValue(Payload, WorkerDTO.class);
+                    WorkerDTO dto = (WorkerDTO) object;
+
+                    System.out.println("test2");
                     WorkerDao workerDao = WorkerDao.getInstance();
-                    workerDao.CreateWorker(worker);
+                    workerDao.CreateWorker(dto);
 
+                    System.out.println("test3");
                 };
                 channel.basicConsume(Queue, true, deliverCallback, consumerTag -> {
                 });
