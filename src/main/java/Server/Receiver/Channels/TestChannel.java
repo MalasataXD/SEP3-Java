@@ -1,8 +1,7 @@
-package Server.Receiver.Channels.Worker;
+package Server.Receiver.Channels;
 
-
-import Database.Dto.WorkerDTO;
-import Database.Implementation.WorkerDao;
+import Server.Receiver.Implementations.MessageHeaders.MessageHeader;
+import Server.Receiver.Implementations.Sender;
 import Server.Receiver.Interfaces.IQueue;
 import Server.Receiver.MQConfig;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -16,14 +15,14 @@ import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import java.util.concurrent.TimeoutException;
 
-public class CreateWorker implements IQueue {
+public class TestChannel implements IQueue {
 
     private String Queue;
     private String Exchane;
     private Connection connection;
     private Channel channel;
 
-    public CreateWorker(String queue, String exchane) {
+    public TestChannel(String queue, String exchane) {
         MQConfig mqConfig = MQConfig.getInstance();
 
         this.Queue = queue;
@@ -57,13 +56,13 @@ public class CreateWorker implements IQueue {
 
     @Override
     public void run() {
-       int count = 0;
+        int count = 0;
 
-       try {
+        try {
             count = channel.queueDeclarePassive(Queue).getMessageCount();
         } catch (IOException e) {
-           throw new RuntimeException(e);
-       }
+            throw new RuntimeException(e);
+        }
 
         while (count != 0) {
             count--;
@@ -78,13 +77,18 @@ public class CreateWorker implements IQueue {
                 DeliverCallback deliverCallback = (consumerTag, delivery) -> {
                     String message = new String(delivery.getBody(), StandardCharsets.UTF_8);
 
-                    System.out.println(" [CreateWorker] Created new worker");
+                    System.out.println(" [TestChannel] : " + message);
 
                     ObjectMapper mapper = new ObjectMapper();
-                    WorkerDTO worker = mapper.readValue(message,WorkerDTO.class);
+                    MessageHeader header = mapper.readValue(message, MessageHeader.class);
 
-                    WorkerDao workerDao = WorkerDao.getInstance();
-                    workerDao.CreateWorker(worker);
+                    System.out.println(" [TestChannel1] :" + header.queue);
+
+                    Sender sender = Sender.getInstance();
+
+                    sender.send(header);
+
+
 
                 };
                 channel.basicConsume(Queue, true, deliverCallback, consumerTag -> {

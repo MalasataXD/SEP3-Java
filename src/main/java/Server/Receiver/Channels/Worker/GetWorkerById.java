@@ -1,6 +1,5 @@
 package Server.Receiver.Channels.Worker;
 
-
 import Database.Dto.WorkerDTO;
 import Database.Implementation.WorkerDao;
 import Server.Receiver.Interfaces.IQueue;
@@ -16,14 +15,13 @@ import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import java.util.concurrent.TimeoutException;
 
-public class CreateWorker implements IQueue {
-
+public class GetWorkerById implements IQueue {
     private String Queue;
     private String Exchane;
     private Connection connection;
     private Channel channel;
 
-    public CreateWorker(String queue, String exchane) {
+    public GetWorkerById(String queue, String exchane) {
         MQConfig mqConfig = MQConfig.getInstance();
 
         this.Queue = queue;
@@ -57,13 +55,13 @@ public class CreateWorker implements IQueue {
 
     @Override
     public void run() {
-       int count = 0;
+        int count = 0;
 
-       try {
+        try {
             count = channel.queueDeclarePassive(Queue).getMessageCount();
         } catch (IOException e) {
-           throw new RuntimeException(e);
-       }
+            throw new RuntimeException(e);
+        }
 
         while (count != 0) {
             count--;
@@ -78,17 +76,16 @@ public class CreateWorker implements IQueue {
                 DeliverCallback deliverCallback = (consumerTag, delivery) -> {
                     String message = new String(delivery.getBody(), StandardCharsets.UTF_8);
 
-                    System.out.println(" [CreateWorker] Created new worker");
+                    System.out.println(" [GetWorkerById] has receive the id");
 
                     ObjectMapper mapper = new ObjectMapper();
-                    WorkerDTO worker = mapper.readValue(message,WorkerDTO.class);
+                    int workerId = Integer.parseInt(message);
 
                     WorkerDao workerDao = WorkerDao.getInstance();
-                    workerDao.CreateWorker(worker);
+                    workerDao.GetWorker(workerId);
 
                 };
-                channel.basicConsume(Queue, true, deliverCallback, consumerTag -> {
-                });
+                channel.basicConsume(Queue, true, deliverCallback, consumerTag -> {});
             } catch (IOException | TimeoutException e) {
                 throw new RuntimeException(e);
             }

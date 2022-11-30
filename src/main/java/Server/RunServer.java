@@ -4,6 +4,7 @@ package Server;
 import Server.Receiver.Channels.Shift.CreateShift;
 import Server.Receiver.Channels.Shift.EditShift;
 import Server.Receiver.Channels.Shift.RemoveShift;
+import Server.Receiver.Channels.TestChannel;
 import Server.Receiver.Channels.Worker.CreateWorker;
 import Server.Receiver.Implementations.Dispatcher;
 import Server.Receiver.Implementations.Skeleton;
@@ -20,6 +21,7 @@ public class RunServer {
         arrayList.add(new CreateShift("CreateShift", ""));
         arrayList.add(new EditShift("EditShift", ""));
         arrayList.add(new RemoveShift("RemoveShift", ""));
+        arrayList.add(new TestChannel("Test", ""));
 
         IDispatcher dispatcher = new Dispatcher("Dispatcher", new Skeleton(arrayList));
         Thread thread = new Thread(dispatcher);
