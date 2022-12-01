@@ -105,13 +105,15 @@ public class CreateShift implements IQueue {
                     // Json => string
                     String Payload = ow.writeValueAsString(messageHeader.payload);
 
-                    //string => object
-                    Object object = mapper.readValue(Payload, WorkerDTO.class);
-
                     //---------------------------------------------
+                    //string => object
+                    Object object = mapper.readValue(Payload, ShiftDTO.class);
+
+                    System.out.println(object);
                     //cast til det object der skal bruges
                     ShiftDTO shift = (ShiftDTO) object;
 
+                    System.out.println(shift.toString());
                     //skriv til dao/DB
                     ShiftDao shiftDao = ShiftDao.getInstance();
                     shiftDao.CreateShift(shift);

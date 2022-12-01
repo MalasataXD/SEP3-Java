@@ -110,9 +110,11 @@ public class EditWorker implements IQueue {
 
                     //skriv til dao/DB
                     WorkerDao workerDao = WorkerDao.getInstance();
+                    System.out.println("workerdao: " + dto);
                     workerDao.UpdateWorker(dto);
 
                     WorkerDTO toSend = workerDao.GetWorker(dto.workerId);
+                    System.out.println("toSend: " + toSend);
 
                     Sender sender = Sender.getInstance();
                     sender.send(new MessageHeader(messageHeader.getQueue(), action, toSend));

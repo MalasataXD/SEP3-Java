@@ -47,4 +47,76 @@ public class ShiftDTO
                 ", bossId=" + bossId +
                 '}';
     }
+
+    public int getShiftId() {
+        return shiftId;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public int getFromHour() {
+        return fromHour;
+    }
+
+    public int getFromMinute() {
+        return fromMinute;
+    }
+
+    public int getToHour() {
+        return toHour;
+    }
+
+    public int getToMinute() {
+        return toMinute;
+    }
+
+    public int getWorkerId() {
+        return workerId;
+    }
+
+    public int getBreakAmount() {
+        return breakAmount;
+    }
+
+    public int getBossId() {
+        return bossId;
+    }
+
+    public void setShiftId(int shiftId) {
+        this.shiftId = shiftId;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public void setFromHour(int fromHour) {
+        this.fromHour = fromHour;
+    }
+
+    public void setFromMinute(int fromMinute) {
+        this.fromMinute = fromMinute;
+    }
+
+    public void setToHour(int toHour) {
+        this.toHour = toHour;
+    }
+
+    public void setToMinute(int toMinute) {
+        this.toMinute = toMinute;
+    }
+
+    public void setWorkerId(int workerId) {
+        this.workerId = workerId;
+    }
+
+    public void setBreakAmount(int breakAmount) {
+        this.breakAmount = breakAmount;
+    }
+
+    public void setBossId(int bossId) {
+        this.bossId = bossId;
+    }
 }

@@ -33,7 +33,7 @@ public class RunServer {
         arrayList.add(new RemoveWorker("RemoveWorker",""));
         arrayList.add(new RemoveShift("RemoveShift", ""));
 
-        //getById
+        //GetById
         arrayList.add(new GetWorkerById("GetWorkerById",""));
         arrayList.add(new GetShiftById("GetShiftById",""));
 

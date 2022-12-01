@@ -105,14 +105,16 @@ public class EditShift implements IQueue {
                     String Payload = ow.writeValueAsString(messageHeader.payload);
 
                     //string => object
-                    Object object = mapper.readValue(Payload, WorkerDTO.class);
+                    Object object = mapper.readValue(Payload, ShiftDTO.class);
 
                     //---------------------------------------------
                     ShiftDTO shift = (ShiftDTO) object;
+                    System.out.println("Shift to update: " + shift);
 
                     //skriv til dao/DB
                     ShiftDao shiftDao = ShiftDao.getInstance();
                     shiftDao.UpdateShift(shift);
+
 
                     ShiftDTO toSend = shiftDao.GetShift(shift.shiftId);
 

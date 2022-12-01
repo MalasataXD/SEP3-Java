@@ -102,16 +102,17 @@ public class GetWorkerById implements IQueue {
                     String Payload = ow.writeValueAsString(messageHeader.payload);
 
                     //string => object
-                    Object object = mapper.readValue(Payload, WorkerDTO.class);
+                    System.out.println("test");
+                    Object object = mapper.readValue(Payload, Integer.class);
 
-                    // TODO: 01-12-2022
-                    //--------------------------------------------- der skal laves en getByIdInDao
+                    //---------------------------------------------
                     //cast til det object der skal bruges
                     int workerId = (int) object;
 
                     //skriv til dao/DB
                     WorkerDao workerDao = WorkerDao.getInstance();
                     WorkerDTO workerDTO = workerDao.GetWorker(workerId);
+
 
                     Sender sender = Sender.getInstance();
                     sender.send(new MessageHeader(messageHeader.getQueue(), action, workerDTO));

@@ -224,6 +224,10 @@ public class ShiftDao implements IShiftDao
         if(old.bossId != changes.bossId && changes.bossId != 0) {updated.setBossId(changes.bossId);}
         else { updated.setBossId(old.bossId);}
 
+        // # Compare BreakAmount
+        if(old.breakAmount != changes.breakAmount && changes.breakAmount != 0) {updated.setBreakAmount(changes.breakAmount);}
+        else { updated.setBreakAmount(old.breakAmount);}
+
         return updated;
     }
 

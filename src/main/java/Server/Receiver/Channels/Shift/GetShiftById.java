@@ -104,7 +104,7 @@ public class GetShiftById implements IQueue {
                     String Payload = ow.writeValueAsString(messageHeader.payload);
 
                     //string => object
-                    Object object = mapper.readValue(Payload, WorkerDTO.class);
+                    Object object = mapper.readValue(Payload, Integer.class);
 
                     //---------------------------------------------
                     //cast til det object der skal bruges
