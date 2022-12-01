@@ -33,16 +33,15 @@ public class Sender {
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost("localhost");
         try (Connection connection = factory.newConnection();
-
              Channel channel = connection.createChannel()) {
 
             channel.queueDeclare(queueName, false, false, false, null);
-
 
             ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
             String message = ow.writeValueAsString(payload);
 
             channel.basicPublish("", queueName, null, message.getBytes(StandardCharsets.UTF_8));
+            System.out.println("sended: " + payload.toString());
         } catch (IOException e) {
             throw new RuntimeException(e);
         } catch (TimeoutException e) {

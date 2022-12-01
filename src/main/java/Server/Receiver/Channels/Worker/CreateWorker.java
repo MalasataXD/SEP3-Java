@@ -4,6 +4,7 @@ package Server.Receiver.Channels.Worker;
 import Database.Dto.WorkerDTO;
 import Database.Implementation.WorkerDao;
 import Server.Receiver.Implementations.MessageHeaders.MessageHeader;
+import Server.Receiver.Implementations.Sender;
 import Server.Receiver.Interfaces.IQueue;
 import Server.Receiver.MQConfig;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -26,18 +27,30 @@ public class CreateWorker implements IQueue {
     private Connection connection;
     private Channel channel;
 
+    private String URL;
+
+    private String action;
+    private boolean durable;
+    private boolean exclusive;
+    private boolean autoDelete;
+    private Map<String,Object> map;
+
     public CreateWorker(String queue, String exchane) {
         MQConfig mqConfig = MQConfig.getInstance();
+
+        // ---------------------------------------------
+        action = "CreateWorker";
+        // ---------------------------------------------
 
         this.Queue = queue;
         Exchane = exchane;
 
-        String URL = mqConfig.getURL();
-
-        boolean durable = mqConfig.isDurable();
-        boolean exclusive = mqConfig.isExclusive();
-        boolean autoDelete = mqConfig.isAutoDelete();
-        Map<String,Object> map = mqConfig.getMap();
+        //from config
+        URL = mqConfig.getURL();
+        durable = mqConfig.isDurable();
+        exclusive = mqConfig.isExclusive();
+        autoDelete = mqConfig.isAutoDelete();
+        map = mqConfig.getMap();
 
         try {
             ConnectionFactory factory = new ConnectionFactory();
@@ -72,34 +85,39 @@ public class CreateWorker implements IQueue {
             count--;
             try {
                 ConnectionFactory factory = new ConnectionFactory();
-                factory.setHost("localhost");
+                factory.setHost(URL);
                 Connection connection = factory.newConnection();
                 Channel channel = connection.createChannel();
 
-                channel.queueDeclare(Queue, false, false, false, null);
+                channel.queueDeclare(Queue, durable, exclusive, autoDelete, map);
 
                 DeliverCallback deliverCallback = (consumerTag, delivery) -> {
                     String message = new String(delivery.getBody(), StandardCharsets.UTF_8);
 
-                    System.out.println(" [CreateWorker] Created new worker " + message);
-
+                    // Json med info til at lave messageHeader => obj af messageHeader
                     ObjectMapper mapper = new ObjectMapper();
                     MessageHeader messageHeader = mapper.readValue(message,MessageHeader.class);
 
-                    System.out.println("test1 " + messageHeader.payload);
-
+                    // payload er i "Test" => Json
                     ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
-                    String Payload = ow.writeValueAsString(messageHeader.payload);
-                    System.out.println("Json: " + Payload);
 
+                    // Json => string
+                    String Payload = ow.writeValueAsString(messageHeader.payload);
+
+                    //string => object
                     Object object = mapper.readValue(Payload, WorkerDTO.class);
+
+                    //---------------------------------------------
+                    //cast til det object der skal bruges
                     WorkerDTO dto = (WorkerDTO) object;
 
-                    System.out.println("test2");
+                    //skriv til dao/DB
                     WorkerDao workerDao = WorkerDao.getInstance();
                     workerDao.CreateWorker(dto);
+                    //---------------------------------------------
 
-                    System.out.println("test3");
+                    Sender sender = Sender.getInstance();
+                    sender.send(new MessageHeader(messageHeader.getQueue(), action, dto));
                 };
                 channel.basicConsume(Queue, true, deliverCallback, consumerTag -> {
                 });

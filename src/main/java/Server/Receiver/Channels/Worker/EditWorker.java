@@ -1,8 +1,6 @@
-package Server.Receiver.Channels.Shift;
+package Server.Receiver.Channels.Worker;
 
-import Database.Dto.ShiftDTO;
 import Database.Dto.WorkerDTO;
-import Database.Implementation.ShiftDao;
 import Database.Implementation.WorkerDao;
 import Server.Receiver.Implementations.MessageHeaders.MessageHeader;
 import Server.Receiver.Implementations.Sender;
@@ -20,9 +18,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import java.util.concurrent.TimeoutException;
 
-public class CreateShift implements IQueue {
-
-    // < Fields
+public class EditWorker implements IQueue {
     private String Queue;
     private String Exchane;
     private Connection connection;
@@ -36,11 +32,11 @@ public class CreateShift implements IQueue {
     private boolean autoDelete;
     private Map<String,Object> map;
 
-    public CreateShift(String queue, String exchane) {
+    public EditWorker(String queue, String exchane) {
         MQConfig mqConfig = MQConfig.getInstance();
 
         // ---------------------------------------------
-        action = "CreateShift";
+        action = "EditWorker";
         // ---------------------------------------------
 
         this.Queue = queue;
@@ -110,14 +106,16 @@ public class CreateShift implements IQueue {
 
                     //---------------------------------------------
                     //cast til det object der skal bruges
-                    ShiftDTO shift = (ShiftDTO) object;
+                    WorkerDTO dto = (WorkerDTO) object;
 
                     //skriv til dao/DB
-                    ShiftDao shiftDao = ShiftDao.getInstance();
-                    shiftDao.CreateShift(shift);
+                    WorkerDao workerDao = WorkerDao.getInstance();
+                    workerDao.UpdateWorker(dto);
+
+                    WorkerDTO toSend = workerDao.GetWorker(dto.workerId);
 
                     Sender sender = Sender.getInstance();
-                    sender.send(new MessageHeader(messageHeader.getQueue(), action, shift));
+                    sender.send(new MessageHeader(messageHeader.getQueue(), action, toSend));
                     //---------------------------------------------
                 };
                 channel.basicConsume(Queue, true, deliverCallback, consumerTag -> {

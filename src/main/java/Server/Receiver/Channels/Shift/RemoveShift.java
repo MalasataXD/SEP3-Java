@@ -1,8 +1,14 @@
 package Server.Receiver.Channels.Shift;
 
+import Database.Dto.WorkerDTO;
 import Database.Implementation.ShiftDao;
+import Database.Implementation.WorkerDao;
+import Server.Receiver.Implementations.MessageHeaders.MessageHeader;
+import Server.Receiver.Implementations.Sender;
 import Server.Receiver.Interfaces.IQueue;
 import Server.Receiver.MQConfig;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
@@ -21,20 +27,30 @@ public class RemoveShift implements IQueue {
     private Connection connection;
     private Channel channel;
 
-    // < Constructor
-    public RemoveShift(String queue, String exchange)
-    {
+    private String URL;
+
+    private String action;
+    private boolean durable;
+    private boolean exclusive;
+    private boolean autoDelete;
+    private Map<String,Object> map;
+
+    public RemoveShift(String queue, String exchane) {
         MQConfig mqConfig = MQConfig.getInstance();
 
+        // ---------------------------------------------
+        action = "RemoveShift";
+        // ---------------------------------------------
+
         this.Queue = queue;
-        Exchane = exchange;
+        Exchane = exchane;
 
-        String URL = mqConfig.getURL();
-
-        boolean durable = mqConfig.isDurable();
-        boolean exclusive = mqConfig.isExclusive();
-        boolean autoDelete = mqConfig.isAutoDelete();
-        Map<String,Object> map = mqConfig.getMap();
+        //from config
+        URL = mqConfig.getURL();
+        durable = mqConfig.isDurable();
+        exclusive = mqConfig.isExclusive();
+        autoDelete = mqConfig.isAutoDelete();
+        map = mqConfig.getMap();
 
         try {
             ConnectionFactory factory = new ConnectionFactory();
@@ -49,14 +65,14 @@ public class RemoveShift implements IQueue {
         }
 
     }
+
     @Override
     public String GetQueue() {
         return Queue;
     }
 
     @Override
-    public void run()
-    {
+    public void run() {
         int count = 0;
 
         try {
@@ -69,23 +85,36 @@ public class RemoveShift implements IQueue {
             count--;
             try {
                 ConnectionFactory factory = new ConnectionFactory();
-                factory.setHost("localhost");
+                factory.setHost(URL);
                 Connection connection = factory.newConnection();
                 Channel channel = connection.createChannel();
 
-                channel.queueDeclare(Queue, false, false, false, null);
-                //System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
+                channel.queueDeclare(Queue, durable, exclusive, autoDelete, map);
 
                 DeliverCallback deliverCallback = (consumerTag, delivery) -> {
                     String message = new String(delivery.getBody(), StandardCharsets.UTF_8);
 
-                    System.out.println(" [RemoveShift] remove Shift");
+                    // Json med info til at lave messageHeader => obj af messageHeader
+                    ObjectMapper mapper = new ObjectMapper();
+                    MessageHeader messageHeader = mapper.readValue(message,MessageHeader.class);
 
-                    int shiftId = Integer.parseInt(message);
+                    // payload er i "Test" => Json
+                    ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
 
+                    // Json => string
+                    String Payload = ow.writeValueAsString(messageHeader.payload);
+
+                    //string => object
+                    Object object = mapper.readValue(Payload, WorkerDTO.class);
+
+                    //---------------------------------------------
+                    //cast til det object der skal bruges
+                    int shiftId = (int) object;
+
+                    //skriv til dao/DB
                     ShiftDao shiftDao = ShiftDao.getInstance();
                     shiftDao.DeleteShift(shiftId);
-
+                    //---------------------------------------------
                 };
                 channel.basicConsume(Queue, true, deliverCallback, consumerTag -> {
                 });
@@ -93,5 +122,6 @@ public class RemoveShift implements IQueue {
                 throw new RuntimeException(e);
             }
         }
+
     }
 }

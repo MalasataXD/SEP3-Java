@@ -1,10 +1,15 @@
 package Server.Receiver.Channels.Shift;
 
 import Database.Dto.ShiftDTO;
+import Database.Dto.WorkerDTO;
 import Database.Implementation.ShiftDao;
+import Database.Implementation.WorkerDao;
+import Server.Receiver.Implementations.MessageHeaders.MessageHeader;
+import Server.Receiver.Implementations.Sender;
 import Server.Receiver.Interfaces.IQueue;
 import Server.Receiver.MQConfig;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
@@ -17,26 +22,35 @@ import java.util.concurrent.TimeoutException;
 
 public class EditShift implements IQueue {
 
-    // < Fields
     private String Queue;
     private String Exchane;
     private Connection connection;
     private Channel channel;
 
-    // < Constructor
-    public EditShift(String queue, String exchange)
-    {
+    private String URL;
+
+    private String action;
+    private boolean durable;
+    private boolean exclusive;
+    private boolean autoDelete;
+    private Map<String,Object> map;
+
+    public EditShift(String queue, String exchane) {
         MQConfig mqConfig = MQConfig.getInstance();
 
+        // ---------------------------------------------
+        action = "EditShift";
+        // ---------------------------------------------
+
         this.Queue = queue;
-        Exchane = exchange;
+        Exchane = exchane;
 
-        String URL = mqConfig.getURL();
-
-        boolean durable = mqConfig.isDurable();
-        boolean exclusive = mqConfig.isExclusive();
-        boolean autoDelete = mqConfig.isAutoDelete();
-        Map<String,Object> map = mqConfig.getMap();
+        //from config
+        URL = mqConfig.getURL();
+        durable = mqConfig.isDurable();
+        exclusive = mqConfig.isExclusive();
+        autoDelete = mqConfig.isAutoDelete();
+        map = mqConfig.getMap();
 
         try {
             ConnectionFactory factory = new ConnectionFactory();
@@ -49,13 +63,16 @@ public class EditShift implements IQueue {
         } catch (TimeoutException e) {
             throw new RuntimeException(e);
         }
+
     }
-    @Override public String GetQueue() {
+
+    @Override
+    public String GetQueue() {
         return Queue;
     }
 
-    @Override public void run()
-    {
+    @Override
+    public void run() {
         int count = 0;
 
         try {
@@ -68,24 +85,40 @@ public class EditShift implements IQueue {
             count--;
             try {
                 ConnectionFactory factory = new ConnectionFactory();
-                factory.setHost("localhost");
+                factory.setHost(URL);
                 Connection connection = factory.newConnection();
                 Channel channel = connection.createChannel();
 
-                channel.queueDeclare(Queue, false, false, false, null);
-                //System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
+                channel.queueDeclare(Queue, durable, exclusive, autoDelete, map);
 
                 DeliverCallback deliverCallback = (consumerTag, delivery) -> {
                     String message = new String(delivery.getBody(), StandardCharsets.UTF_8);
 
-                    System.out.println(" [EditShift] Edit Shift");
-
+                    // Json med info til at lave messageHeader => obj af messageHeader
                     ObjectMapper mapper = new ObjectMapper();
-                    ShiftDTO shift = mapper.readValue(message,ShiftDTO.class);
+                    MessageHeader messageHeader = mapper.readValue(message,MessageHeader.class);
 
+                    // payload er i "Test" => Json
+                    ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+
+                    // Json => string
+                    String Payload = ow.writeValueAsString(messageHeader.payload);
+
+                    //string => object
+                    Object object = mapper.readValue(Payload, WorkerDTO.class);
+
+                    //---------------------------------------------
+                    ShiftDTO shift = (ShiftDTO) object;
+
+                    //skriv til dao/DB
                     ShiftDao shiftDao = ShiftDao.getInstance();
                     shiftDao.UpdateShift(shift);
 
+                    ShiftDTO toSend = shiftDao.GetShift(shift.shiftId);
+
+                    Sender sender = Sender.getInstance();
+                    sender.send(new MessageHeader(messageHeader.getQueue(), action, toSend));
+                    //---------------------------------------------
                 };
                 channel.basicConsume(Queue, true, deliverCallback, consumerTag -> {
                 });

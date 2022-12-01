@@ -3,7 +3,6 @@ package Server.Receiver.Channels.Shift;
 import Database.Dto.ShiftDTO;
 import Database.Dto.WorkerDTO;
 import Database.Implementation.ShiftDao;
-import Database.Implementation.WorkerDao;
 import Server.Receiver.Implementations.MessageHeaders.MessageHeader;
 import Server.Receiver.Implementations.Sender;
 import Server.Receiver.Interfaces.IQueue;
@@ -20,8 +19,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import java.util.concurrent.TimeoutException;
 
-public class CreateShift implements IQueue {
-
+public class GetShiftById implements IQueue {
     // < Fields
     private String Queue;
     private String Exchane;
@@ -36,11 +34,11 @@ public class CreateShift implements IQueue {
     private boolean autoDelete;
     private Map<String,Object> map;
 
-    public CreateShift(String queue, String exchane) {
+    public GetShiftById(String queue, String exchane) {
         MQConfig mqConfig = MQConfig.getInstance();
 
         // ---------------------------------------------
-        action = "CreateShift";
+        action = "GetShiftById";
         // ---------------------------------------------
 
         this.Queue = queue;
@@ -110,11 +108,11 @@ public class CreateShift implements IQueue {
 
                     //---------------------------------------------
                     //cast til det object der skal bruges
-                    ShiftDTO shift = (ShiftDTO) object;
+                    int shiftId = (int) object;
 
                     //skriv til dao/DB
                     ShiftDao shiftDao = ShiftDao.getInstance();
-                    shiftDao.CreateShift(shift);
+                    ShiftDTO shift = shiftDao.GetShift(shiftId);
 
                     Sender sender = Sender.getInstance();
                     sender.send(new MessageHeader(messageHeader.getQueue(), action, shift));
