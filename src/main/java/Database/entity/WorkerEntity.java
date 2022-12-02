@@ -3,7 +3,9 @@ package Database.entity;
 import jakarta.persistence.*;
 
 @Entity
-@NamedQuery(name="Worker.ById",query = "select w from WorkerEntity w where w.workerId = ?1")
+@NamedQuery(name="Worker.ById",query = "SELECT w FROM WorkerEntity w where w.workerId  = ?1")
+@NamedQuery(name="Worker.ByFullName",query = "SELECT w FROM WorkerEntity w where w.firstName = ?1 and w.lastName = ?2")
+@NamedQuery(name="Worker.GetAll",query = "SELECT w FROM WorkerEntity w")
 @Table(name = "worker", schema = "vagtplanssystem", catalog = "")
 public class WorkerEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)

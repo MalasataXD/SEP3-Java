@@ -3,7 +3,8 @@ package Database.entity;
 import jakarta.persistence.*;
 
 @Entity
-@NamedQuery(name="Shift.ById",query = "SELECT s FROM ShiftsEntity s where s.vagtId = ?1 ")
+@NamedQuery(name="Shift.ById",query = "SELECT s FROM ShiftsEntity s where s.vagtId  = ?1")
+@NamedQuery(name="Shift.GetAll",query = "SELECT s FROM ShiftsEntity s")
 @Table(name = "shifts", schema = "vagtplanssystem", catalog = "")
 public class ShiftsEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
