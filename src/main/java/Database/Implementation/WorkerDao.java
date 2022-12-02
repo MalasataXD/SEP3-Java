@@ -1,8 +1,8 @@
 package Database.Implementation;
 
 import Database.Dto.WorkerDTO;
-import Database.Interfaces.IWorkerDao;
 import Database.entity.WorkerEntity;
+import Database.Interfaces.IWorkerDao;
 import Database.util.EntityConverter;
 import jakarta.persistence.*;
 import org.hibernate.HibernateException;
@@ -10,6 +10,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+
+import java.util.ArrayList;
 
 public class WorkerDao implements IWorkerDao
 {
@@ -48,7 +50,6 @@ public class WorkerDao implements IWorkerDao
             transaction.begin();
 
             // # Create Worker (Entity)
-            //TODO: Replace with convert method
             WorkerEntity entity = EntityConverter.toEntity(toCreate);
 
             // * Add the entity to the transaction (INSERT)
@@ -69,7 +70,7 @@ public class WorkerDao implements IWorkerDao
         }
     }
 
-    // < Get a new worker
+    // < Get an existing worker using Id
     @Override public WorkerDTO GetWorker(int id)
     {
         // # Setup for Hibernate
@@ -107,6 +108,128 @@ public class WorkerDao implements IWorkerDao
 
         // # Return the Worker with the given id
         return foundWorker;
+    }
+    // < Get an existing worker using full name
+    @Override public WorkerDTO GetWorkerByFullName(String fullName)
+    {
+        // < Split full name into first and last name
+        String[] split = fullName.split(" ",2);
+        String firstName = split[0];
+        String lastName = split[1];
+
+        // # Setup for Hibernate
+        EntityManagerFactory factory = Persistence.createEntityManagerFactory("default");
+        EntityManager manager = factory.createEntityManager();
+        EntityTransaction transaction = manager.getTransaction();
+
+        WorkerDTO foundWorker;
+        try
+        {
+            // * Start the transaction
+            transaction.begin();
+
+            // * Search for worker in database
+            TypedQuery<WorkerEntity> WorkerByFullName = manager.createNamedQuery("Worker.ByFullName", WorkerEntity.class);
+            WorkerByFullName.setParameter(1, firstName);
+            WorkerByFullName.setParameter(2,lastName);
+
+            // # Convert from Worker (Entity) to WorkerDTO
+            WorkerEntity foundInDatabase = WorkerByFullName.getSingleResult(); // Extract the worker from the result set
+            foundWorker = EntityConverter.toDTO(foundInDatabase);
+
+            // * End the transaction
+            transaction.commit();
+        }
+        finally
+        {
+            // ! If something went wrong, close connection.
+            if (transaction.isActive())
+            {
+                transaction.rollback();
+            }
+            manager.close();
+            factory.close();
+        }
+
+        // # Return the Worker with the given full name
+        return foundWorker;
+    }
+    // < Get a list of all workers
+    @Override public ArrayList<WorkerDTO> getAllWorkers()
+    {
+        // # Setup for Hibernate
+        EntityManagerFactory factory = Persistence.createEntityManagerFactory("default");
+        EntityManager manager = factory.createEntityManager();
+        EntityTransaction transaction = manager.getTransaction();
+
+        ArrayList<WorkerDTO> dtos = new ArrayList<>();
+        try
+        {
+            // * Start the transaction
+            transaction.begin();
+
+            // * Get All workers in the database.
+            TypedQuery<WorkerEntity> GetAllWorkers = manager.createNamedQuery("Worker.GetAll", WorkerEntity.class);
+
+            // # Convert from Worker (Entity) to WorkerDTO
+            ArrayList<WorkerEntity> workersEntity = (ArrayList<WorkerEntity>) GetAllWorkers.getResultList(); // Extract the worker from the result set
+
+            // < Convert to DTOs
+            for (WorkerEntity worker: workersEntity)
+            {
+                WorkerDTO dto = EntityConverter.toDTO(worker);
+                dtos.add(dto);
+            }
+
+            // * End the transaction
+            transaction.commit();
+        }
+        finally
+        {
+            // ! If something went wrong, close connection.
+            if (transaction.isActive())
+            {
+                transaction.rollback();
+            }
+            manager.close();
+            factory.close();
+        }
+
+        // # Return a list of all workers.
+        return dtos;
+    }
+    // < Search parameters.
+    @Override
+    public ArrayList<WorkerDTO> getBySearchParameters(String fullName)
+    {
+        // # Get all workers in database
+        ArrayList<WorkerDTO> allWorkers = getAllWorkers();
+
+        ArrayList<WorkerDTO> result = new ArrayList<>();
+
+        // # Check if the string contains space or not
+        if(!fullName.matches(".*\\s.*"))
+        {
+            for (WorkerDTO worker: allWorkers)
+            {
+                if(worker.firstName.equalsIgnoreCase(fullName) | worker.lastName.equalsIgnoreCase(fullName))
+                {
+                    result.add(worker);
+                }
+            }
+        }
+        else
+        {
+            for (WorkerDTO worker:allWorkers)
+            {
+                if(worker.getFullname().equalsIgnoreCase(fullName))
+                {
+                    result.add(worker);
+                }
+            }
+        }
+
+        return result;
     }
 
     // < Update an existing worker
@@ -192,6 +315,8 @@ public class WorkerDao implements IWorkerDao
             session.close();
         }
     }
+
+
 
     // ? Private methods
     private static WorkerEntity Update(WorkerDTO old, WorkerDTO changes)

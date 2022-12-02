@@ -20,20 +20,16 @@ public class WorkerDTO
         this.address = address;
     }
 
-    public WorkerDTO(String firstName, String lastName, int phoneNumber, String mail, String address)
-    {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.phoneNumber = phoneNumber;
-        this.mail = mail;
-        this.address = address;
-    }
-
     public WorkerDTO()
     {
         // ! EMPTY
     }
 
+    // < Get Full name
+    public String getFullname()
+    {
+        return firstName + " " + lastName;
+    }
 
 
     // < ToString

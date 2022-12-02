@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="8b797422-55a4-4c7b-bbd8-3d842e38230a" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Database/Dto/ShiftDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Database/Dto/ShiftDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Database/Dto/WorkerDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Database/Dto/WorkerDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Database/Implementation/ShiftDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Database/Implementation/ShiftDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Database/Implementation/WorkerDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Database/Implementation/WorkerDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Database/Interfaces/IShiftDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Database/Interfaces/IShiftDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Database/Interfaces/IWorkerDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Database/Interfaces/IWorkerDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Database/entity/ShiftsEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Database/entity/ShiftsEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Database/entity/WorkerEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Database/entity/WorkerEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Database/test/ShiftDaoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Database/test/ShiftDaoTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Database/test/WorkerDaoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Database/test/WorkerDaoTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Database/util/EntityConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Database/util/EntityConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Server/Receiver/Channels/Shift/CreateShift.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Receiver/Channels/Shift/CreateShift.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Server/Receiver/Channels/Shift/EditShift.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Receiver/Channels/Shift/EditShift.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Server/Receiver/Channels/Shift/GetShiftById.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Receiver/Channels/Shift/GetShiftById.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Server/Receiver/Channels/Shift/RemoveShift.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Receiver/Channels/Shift/RemoveShift.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Server/Receiver/Channels/Worker/CreateWorker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Receiver/Channels/Worker/CreateWorker.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="c24e5a5a-633c-42b1-825d-42072ef119cf" />
+        <option name="url" value="https://github.com/MalasataXD/SEP3-Java.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="Use Maven wrapper" />
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="2ILm9C34latHxp9CKPcMmBlvbRq" />
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+    <option name="showMembers" value="true" />
+    <option name="showVisibilityIcons" value="true" />
+    <option name="sortByType" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "Problems",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RunManager" selected="Application.WorkerDaoTest">
+    <configuration name="ShiftDaoTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Database.test.ShiftDaoTest" />
+      <module name="SEP3" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Database.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="WorkerDaoTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Database.test.WorkerDaoTest" />
+      <module name="SEP3" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Database.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.WorkerDaoTest" />
+        <item itemvalue="Application.ShiftDaoTest" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="8b797422-55a4-4c7b-bbd8-3d842e38230a" name="Changes" comment="" />
+      <created>1669969083755</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1669969083755</updated>
+      <workItem from="1669969085017" duration="24000" />
+      <workItem from="1669969118683" duration="175000" />
+      <workItem from="1669969296056" duration="1046000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

@@ -47,21 +47,18 @@ public class EntityConverter
     // ¤ Shift
     public static ShiftDTO toDTO(ShiftsEntity toConvert)
     {
-        ShiftDTO shift = new ShiftDTO();
-
-        if(toConvert.getVagtId() != 0)
-        {
-            shift.shiftId = (int) toConvert.getVagtId();
-            shift.date = toConvert.getDate();
-            shift.fromHour = toConvert.getFromHour();
-            shift.fromMinute = toConvert.getFromMinute();
-            shift.toHour = toConvert.getToHour();
-            shift.toMinute = toConvert.getToMinute();
-            shift.workerId = toConvert.getWorkerId();
-            shift.breakAmount = toConvert.getBreakAmount();
-            shift.bossId = toConvert.getBossId();
-        }
-
+        ShiftDTO shift = new ShiftDTO
+                (
+                        (int)toConvert.getVagtId(),
+                        toConvert.getDate(),
+                        toConvert.getFromHour(),
+                        toConvert.getFromMinute(),
+                        toConvert.getToHour(),
+                        toConvert.getToMinute(),
+                        toConvert.getWorkerId(),
+                        toConvert.getBreakAmount(),
+                        toConvert.getBossId()
+                );
         return shift;
     }
 

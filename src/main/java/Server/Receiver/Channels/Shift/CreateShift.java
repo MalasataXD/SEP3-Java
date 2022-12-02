@@ -3,7 +3,6 @@ package Server.Receiver.Channels.Shift;
 import Database.Dto.ShiftDTO;
 import Database.Dto.WorkerDTO;
 import Database.Implementation.ShiftDao;
-import Database.Implementation.WorkerDao;
 import Server.Receiver.Implementations.MessageHeaders.MessageHeader;
 import Server.Receiver.Implementations.Sender;
 import Server.Receiver.Interfaces.IQueue;

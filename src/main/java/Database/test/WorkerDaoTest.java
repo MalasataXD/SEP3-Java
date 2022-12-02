@@ -1,15 +1,12 @@
 package Database.test;
 
-import Database.Dto.WorkerDTO;
-import Database.Implementation.ShiftDao;
 import Database.Implementation.WorkerDao;
-
 public class WorkerDaoTest
 {
-    public static void main(String[] args) throws Exception
+    public static void main(String[] args)
     {
         WorkerDao dao = WorkerDao.getInstance();
-        dao.DeleteWorker(12);
+        System.out.println(dao.getBySearchParameters("Mads"));
     }
 
 

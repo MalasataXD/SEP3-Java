@@ -1,8 +1,10 @@
 package Database.Implementation;
 
 import Database.Dto.ShiftDTO;
+import Database.Dto.WorkerDTO;
 import Database.Interfaces.IShiftDao;
 import Database.entity.ShiftsEntity;
+
 import Database.util.EntityConverter;
 import jakarta.persistence.*;
 import org.hibernate.HibernateException;
@@ -10,6 +12,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+
+import java.util.ArrayList;
 
 public class ShiftDao implements IShiftDao
 {
@@ -33,6 +37,7 @@ public class ShiftDao implements IShiftDao
             }
         return instance;
     }
+
 
     // < Create a new Shift
     @Override public void CreateShift(ShiftDTO toCreate)
@@ -105,6 +110,102 @@ public class ShiftDao implements IShiftDao
 
         // # Return the Shift with the given id
         return foundShift;
+    }
+
+    @Override
+    public ArrayList<ShiftDTO> GetAllShifts()
+    {
+        // # Setup for Hibernate
+        EntityManagerFactory factory = Persistence.createEntityManagerFactory("default");
+        EntityManager manager = factory.createEntityManager();
+        EntityTransaction transaction = manager.getTransaction();
+
+        ArrayList<ShiftDTO> dtos = new ArrayList<>();
+        try
+        {
+            // * Start the transaction
+            transaction.begin();
+
+            // * Get All workers in the database.
+            TypedQuery<ShiftsEntity> GetAllShifts = manager.createNamedQuery("Shift.GetAll", ShiftsEntity.class);
+
+            // # Convert from Worker (Entity) to WorkerDTO
+            ArrayList<ShiftsEntity> shiftsEntity = (ArrayList<ShiftsEntity>) GetAllShifts.getResultList(); // Extract the worker from the result set
+
+            System.out.println(shiftsEntity.get(0));
+            // < Convert to DTOs
+            for (ShiftsEntity shift: shiftsEntity)
+            {
+                ShiftDTO dto = EntityConverter.toDTO(shift);
+                dtos.add(dto);
+            }
+
+            // * End the transaction
+            transaction.commit();
+        }
+        finally
+        {
+            // ! If something went wrong, close connection.
+            if (transaction.isActive())
+            {
+                transaction.rollback();
+            }
+            manager.close();
+            factory.close();
+        }
+
+        // # Return a list of all workers.
+        return dtos;
+    }
+    @Override
+    public ArrayList<ShiftDTO> getBySearchParameters(String date, String workerName)
+    {
+        ArrayList<ShiftDTO> allShifts = GetAllShifts();
+        ArrayList<ShiftDTO> result = new ArrayList<>();
+
+        // # Date is set and workername is not.
+        if(date != null && workerName == null)
+        {
+            for (ShiftDTO shift :allShifts)
+            {
+                if(shift.date.equals(date))
+                {
+                    result.add(shift);
+                }
+            }
+        }
+
+        // # Workername is set and date is not.
+        if(workerName != null && date == null)
+        {
+            for (ShiftDTO shift : allShifts)
+            {
+                WorkerDTO worker = WorkerDao.getInstance().GetWorker(shift.workerId);
+                if(worker.firstName.equalsIgnoreCase(workerName) | worker.lastName.equalsIgnoreCase(workerName) | worker.getFullname().equalsIgnoreCase(workerName))
+                {
+                    result.add(shift);
+                }
+            }
+        }
+
+        // # Both are set
+        if(date != null && workerName != null)
+        {
+            for (ShiftDTO shift :allShifts)
+            {
+                if(shift.date.equals(date))
+                {
+                    WorkerDTO worker = WorkerDao.getInstance().GetWorker(shift.workerId);
+                    if(worker.firstName.equalsIgnoreCase(workerName) | worker.lastName.equalsIgnoreCase(workerName) | worker.getFullname().equalsIgnoreCase(workerName))
+                    {
+                        result.add(shift);
+                    }
+                }
+            }
+        }
+
+
+        return result;
     }
 
     // < Update an existing Shift in the database, by using id as the parameter
@@ -223,10 +324,6 @@ public class ShiftDao implements IShiftDao
         // # Compare BossId
         if(old.bossId != changes.bossId && changes.bossId != 0) {updated.setBossId(changes.bossId);}
         else { updated.setBossId(old.bossId);}
-
-        // # Compare BreakAmount
-        if(old.breakAmount != changes.breakAmount && changes.breakAmount != 0) {updated.setBreakAmount(changes.breakAmount);}
-        else { updated.setBreakAmount(old.breakAmount);}
 
         return updated;
     }
