@@ -4,27 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8b797422-55a4-4c7b-bbd8-3d842e38230a" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
+    <list default="true" id="8b797422-55a4-4c7b-bbd8-3d842e38230a" name="Changes" comment="+ SearchParameters method for Worker and Shift&#10;+ GetAllWorkers&#10;+ GetAllShifts&#10;+ GetWorkerByFullName">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Database/Dto/ShiftDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Database/Dto/ShiftDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Database/Dto/WorkerDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Database/Dto/WorkerDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Database/Implementation/ShiftDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Database/Implementation/ShiftDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Database/Implementation/WorkerDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Database/Implementation/WorkerDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Database/Interfaces/IShiftDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Database/Interfaces/IShiftDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Database/Interfaces/IWorkerDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Database/Interfaces/IWorkerDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Database/entity/ShiftsEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Database/entity/ShiftsEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Database/entity/WorkerEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Database/entity/WorkerEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Database/test/ShiftDaoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Database/test/ShiftDaoTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Database/test/WorkerDaoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Database/test/WorkerDaoTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Database/util/EntityConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Database/util/EntityConverter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Server/Receiver/Channels/Shift/CreateShift.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Receiver/Channels/Shift/CreateShift.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/Receiver/Channels/Shift/EditShift.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Receiver/Channels/Shift/EditShift.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/Receiver/Channels/Shift/GetShiftById.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Receiver/Channels/Shift/GetShiftById.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/Receiver/Channels/Shift/RemoveShift.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Receiver/Channels/Shift/RemoveShift.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/Receiver/Channels/Worker/CreateWorker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Receiver/Channels/Worker/CreateWorker.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +17,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -65,22 +50,35 @@
     <option name="showVisibilityIcons" value="true" />
     <option name="sortByType" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "project.structure.last.edited": "Problems",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.2",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Problems&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
-  <component name="RunManager" selected="Application.WorkerDaoTest">
+}</component>
+  <component name="RunManager" selected="Application.RunServer">
+    <configuration name="RunServer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Server.RunServer" />
+      <module name="SEP3" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Server.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="ShiftDaoTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Database.test.ShiftDaoTest" />
       <module name="SEP3" />
@@ -109,8 +107,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.WorkerDaoTest" />
+        <item itemvalue="Application.RunServer" />
         <item itemvalue="Application.ShiftDaoTest" />
+        <item itemvalue="Application.WorkerDaoTest" />
       </list>
     </recent_temporary>
   </component>
@@ -124,8 +123,25 @@
       <updated>1669969083755</updated>
       <workItem from="1669969085017" duration="24000" />
       <workItem from="1669969118683" duration="175000" />
-      <workItem from="1669969296056" duration="1046000" />
+      <workItem from="1669969296056" duration="1322000" />
+      <workItem from="1669972219776" duration="73000" />
+      <workItem from="1669974807084" duration="1464000" />
     </task>
+    <task id="LOCAL-00001" summary="+ SearchParameters method for Worker and Shift&#10;+ GetAllWorkers&#10;+ GetAllShifts&#10;+ GetWorkerByFullName">
+      <created>1669970557465</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1669970557465</updated>
+    </task>
+    <task id="LOCAL-00002" summary="+ SearchParameters method for Worker and Shift&#10;+ GetAllWorkers&#10;+ GetAllShifts&#10;+ GetWorkerByFullName">
+      <created>1669970576807</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1669970576807</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -141,5 +157,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="+ SearchParameters method for Worker and Shift&#10;+ GetAllWorkers&#10;+ GetAllShifts&#10;+ GetWorkerByFullName" />
+    <option name="LAST_COMMIT_MESSAGE" value="+ SearchParameters method for Worker and Shift&#10;+ GetAllWorkers&#10;+ GetAllShifts&#10;+ GetWorkerByFullName" />
   </component>
 </project>

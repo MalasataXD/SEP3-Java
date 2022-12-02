@@ -316,8 +316,6 @@ public class WorkerDao implements IWorkerDao
         }
     }
 
-
-
     // ? Private methods
     private static WorkerEntity Update(WorkerDTO old, WorkerDTO changes)
     {

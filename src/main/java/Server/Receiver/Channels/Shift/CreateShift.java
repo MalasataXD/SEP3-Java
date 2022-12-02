@@ -3,6 +3,7 @@ package Server.Receiver.Channels.Shift;
 import Database.Dto.ShiftDTO;
 import Database.Dto.WorkerDTO;
 import Database.Implementation.ShiftDao;
+import Database.Implementation.WorkerDao;
 import Server.Receiver.Implementations.MessageHeaders.MessageHeader;
 import Server.Receiver.Implementations.Sender;
 import Server.Receiver.Interfaces.IQueue;
@@ -102,23 +103,27 @@ public class CreateShift implements IQueue {
                     ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
 
                     // Json => string
-                    String Payload = ow.writeValueAsString(messageHeader.payload);
 
+                    String Payload = ow.writeValueAsString(messageHeader.payload);
+                    System.out.println("JSON: " + Payload);
                     //---------------------------------------------
                     //string => object
-                    Object object = mapper.readValue(Payload, ShiftDTO.class);
+                    ShiftDTO object = mapper.readValue(Payload, ShiftDTO.class);
 
-                    System.out.println(object);
                     //cast til det object der skal bruges
                     ShiftDTO shift = (ShiftDTO) object;
+                    System.out.println("OBJECT: " + shift);
 
                     System.out.println(shift.toString());
                     //skriv til dao/DB
                     ShiftDao shiftDao = ShiftDao.getInstance();
                     shiftDao.CreateShift(shift);
 
+                    // # Fetch Shift
+                    ShiftDTO Created = shiftDao.getBySearchParameters(shift.date, WorkerDao.getInstance().GetWorker(shift.workerId).getFullname()).get(0);
+
                     Sender sender = Sender.getInstance();
-                    sender.send(new MessageHeader(messageHeader.getQueue(), action, shift));
+                    sender.send(new MessageHeader(messageHeader.getQueue(), action, Created));
                     //---------------------------------------------
                 };
                 channel.basicConsume(Queue, true, deliverCallback, consumerTag -> {

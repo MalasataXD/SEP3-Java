@@ -46,6 +46,12 @@ public class ShiftDTO
         this.bossId = bossId;
     }
 
+    public ShiftDTO()
+    {
+        // ! EMPTY
+    }
+
+
     // < ToString
     @Override
     public String toString()
