@@ -9,6 +9,6 @@ public class ShiftDaoTest
     {
         ShiftDao dao = ShiftDao.getInstance();
 
-        System.out.println(dao.getBySearchParameters("11-10-2012","Mads Hylleberg"));
+        System.out.println(dao.getBySearchParameters(null,null));
     }
 }

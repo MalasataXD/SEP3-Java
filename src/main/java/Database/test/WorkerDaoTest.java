@@ -6,7 +6,7 @@ public class WorkerDaoTest
     public static void main(String[] args)
     {
         WorkerDao dao = WorkerDao.getInstance();
-        System.out.println(dao.getBySearchParameters("Mads"));
+        System.out.println(dao.getBySearchParameters(null));
     }
 
 

@@ -207,6 +207,12 @@ public class WorkerDao implements IWorkerDao
 
         ArrayList<WorkerDTO> result = new ArrayList<>();
 
+        if(fullName == null)
+        {
+            return allWorkers;
+        }
+
+
         // # Check if the string contains space or not
         if(!fullName.matches(".*\\s.*"))
         {

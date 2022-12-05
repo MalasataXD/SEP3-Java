@@ -204,7 +204,10 @@ public class ShiftDao implements IShiftDao
             }
         }
 
-
+        if(result.isEmpty())
+        {
+            result.addAll(allShifts);
+        }
         return result;
     }
 
