@@ -181,7 +181,7 @@ public class ShiftDao implements IShiftDao
             for (ShiftDTO shift : allShifts)
             {
                 WorkerDTO worker = WorkerDao.getInstance().GetWorker(shift.workerId);
-                if(worker.firstName.equalsIgnoreCase(workerName) | worker.lastName.equalsIgnoreCase(workerName) | worker.getFullname().equalsIgnoreCase(workerName))
+                if(worker.firstName.toLowerCase().contains(workerName) | worker.lastName.toLowerCase().contains(workerName) | worker.getFullname().toLowerCase().contains(workerName))
                 {
                     result.add(shift);
                 }
@@ -196,7 +196,7 @@ public class ShiftDao implements IShiftDao
                 if(shift.date.equals(date))
                 {
                     WorkerDTO worker = WorkerDao.getInstance().GetWorker(shift.workerId);
-                    if(worker.firstName.equalsIgnoreCase(workerName) | worker.lastName.equalsIgnoreCase(workerName) | worker.getFullname().equalsIgnoreCase(workerName))
+                    if(worker.firstName.toLowerCase().contains(workerName) | worker.lastName.toLowerCase().contains(workerName) | worker.getFullname().toLowerCase().contains(workerName))
                     {
                         result.add(shift);
                     }
