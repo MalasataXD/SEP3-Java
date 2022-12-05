@@ -4,14 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3cf24cbd-2f25-49c3-b1f4-7e01252d6f3b" name="Changes" comment="Fixed/Tested channel: &#10;1. CreateShift.java&#10;2. EditShift.java&#10;3. EditWorker.java&#10;4. CreateWorker.java&#10;5. RemoveShift.java&#10;6. RemoveWorker.java&#10;&#10;Added breakAmount to dao">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="3cf24cbd-2f25-49c3-b1f4-7e01252d6f3b" name="Changes" comment="Search parameters is done for worker and shift.&#10;+ GetByFullName">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Database/Dto/ShiftDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Database/Dto/ShiftDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/Receiver/Channels/Worker/GetWorkerById.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Receiver/Channels/Worker/GetWorkerById.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/Receiver/Implementations/Dispatcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Receiver/Implementations/Dispatcher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/Receiver/Implementations/Sender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Receiver/Implementations/Sender.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/RunServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/RunServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Database/Implementation/ShiftDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Database/Implementation/ShiftDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Server/Receiver/Channels/Shift/GetShiftById.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Receiver/Channels/Shift/GetShiftById.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -138,7 +134,7 @@
       <workItem from="1669972219776" duration="73000" />
       <workItem from="1669974807084" duration="1464000" />
       <workItem from="1670165309596" duration="728000" />
-      <workItem from="1670233506821" duration="4452000" />
+      <workItem from="1670233506821" duration="16897000" />
     </task>
     <task id="LOCAL-00001" summary="+ SearchParameters method for Worker and Shift&#10;+ GetAllWorkers&#10;+ GetAllShifts&#10;+ GetWorkerByFullName">
       <created>1669970557465</created>
@@ -154,7 +150,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669970576807</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Search parameters is done for worker and shift.&#10;+ GetByFullName">
+      <created>1670238046019</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1670238046019</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -173,6 +176,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="+ SearchParameters method for Worker and Shift&#10;+ GetAllWorkers&#10;+ GetAllShifts&#10;+ GetWorkerByFullName" />
-    <option name="LAST_COMMIT_MESSAGE" value="+ SearchParameters method for Worker and Shift&#10;+ GetAllWorkers&#10;+ GetAllShifts&#10;+ GetWorkerByFullName" />
+    <MESSAGE value="Search parameters is done for worker and shift.&#10;+ GetByFullName" />
+    <option name="LAST_COMMIT_MESSAGE" value="Search parameters is done for worker and shift.&#10;+ GetByFullName" />
   </component>
 </project>

@@ -103,11 +103,11 @@ public class GetShiftById implements IQueue {
                     // Json => string
                     String Payload = ow.writeValueAsString(messageHeader.payload);
 
+                    //cast til det object der skal bruges
                     //string => object
                     Object object = mapper.readValue(Payload, Integer.class);
 
                     //---------------------------------------------
-                    //cast til det object der skal bruges
                     int shiftId = (int) object;
 
                     //skriv til dao/DB
