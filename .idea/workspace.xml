@@ -4,16 +4,26 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8b797422-55a4-4c7b-bbd8-3d842e38230a" name="Changes" comment="+ SearchParameters method for Worker and Shift&#10;+ GetAllWorkers&#10;+ GetAllShifts&#10;+ GetWorkerByFullName">
+    <list default="true" id="3cf24cbd-2f25-49c3-b1f4-7e01252d6f3b" name="Changes" comment="Fixed/Tested channel: &#10;1. CreateShift.java&#10;2. EditShift.java&#10;3. EditWorker.java&#10;4. CreateWorker.java&#10;5. RemoveShift.java&#10;6. RemoveWorker.java&#10;&#10;Added breakAmount to dao">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Database/Dto/ShiftDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Database/Dto/ShiftDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Database/Implementation/WorkerDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Database/Implementation/WorkerDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/Receiver/Channels/Shift/CreateShift.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Receiver/Channels/Shift/CreateShift.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Server/Receiver/Channels/Worker/GetWorkerById.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Receiver/Channels/Worker/GetWorkerById.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Server/Receiver/Implementations/Dispatcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Receiver/Implementations/Dispatcher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Server/Receiver/Implementations/Sender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Receiver/Implementations/Sender.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Server/RunServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/RunServer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -44,6 +54,7 @@
     </option>
   </component>
   <component name="ProjectId" id="2ILm9C34latHxp9CKPcMmBlvbRq" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
     <option name="showMembers" value="true" />
@@ -116,7 +127,7 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="8b797422-55a4-4c7b-bbd8-3d842e38230a" name="Changes" comment="" />
+      <changelist id="3cf24cbd-2f25-49c3-b1f4-7e01252d6f3b" name="Changes" comment="Fixed/Tested channel: &#10;1. CreateShift.java&#10;2. EditShift.java&#10;3. EditWorker.java&#10;4. CreateWorker.java&#10;5. RemoveShift.java&#10;6. RemoveWorker.java&#10;&#10;Added breakAmount to dao" />
       <created>1669969083755</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -126,6 +137,8 @@
       <workItem from="1669969296056" duration="1322000" />
       <workItem from="1669972219776" duration="73000" />
       <workItem from="1669974807084" duration="1464000" />
+      <workItem from="1670165309596" duration="728000" />
+      <workItem from="1670233506821" duration="4452000" />
     </task>
     <task id="LOCAL-00001" summary="+ SearchParameters method for Worker and Shift&#10;+ GetAllWorkers&#10;+ GetAllShifts&#10;+ GetWorkerByFullName">
       <created>1669970557465</created>

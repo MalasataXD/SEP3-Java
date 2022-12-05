@@ -1,15 +1,9 @@
 package Server;
 
 
-import Server.Receiver.Channels.Shift.CreateShift;
-import Server.Receiver.Channels.Shift.EditShift;
-import Server.Receiver.Channels.Shift.GetShiftById;
-import Server.Receiver.Channels.Shift.RemoveShift;
+import Server.Receiver.Channels.Shift.*;
 import Server.Receiver.Channels.TestChannel;
-import Server.Receiver.Channels.Worker.CreateWorker;
-import Server.Receiver.Channels.Worker.EditWorker;
-import Server.Receiver.Channels.Worker.GetWorkerById;
-import Server.Receiver.Channels.Worker.RemoveWorker;
+import Server.Receiver.Channels.Worker.*;
 import Server.Receiver.Implementations.Dispatcher;
 import Server.Receiver.Implementations.Skeleton;
 import Server.Receiver.Interfaces.IDispatcher;
@@ -37,8 +31,18 @@ public class RunServer {
         arrayList.add(new GetWorkerById("GetWorkerById",""));
         arrayList.add(new GetShiftById("GetShiftById",""));
 
+        //GetByFullName
+        arrayList.add(new GetWorkerByFullName("GetWorkerByFullName", ""));
+
+        //SearchParameters
+        arrayList.add(new GetWorkerBySearchParameters("GetWorkerBySearchParameters", ""));
+        arrayList.add(new GetShiftBySearchParameters("GetShiftBySearchParameters", ""));
+
         //Test
         arrayList.add(new TestChannel("Test", ""));
+
+
+
 
         IDispatcher dispatcher = new Dispatcher("Dispatcher", new Skeleton(arrayList));
         Thread thread = new Thread(dispatcher);

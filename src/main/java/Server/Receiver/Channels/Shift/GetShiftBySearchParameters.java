@@ -1,7 +1,8 @@
-package Server.Receiver.Channels.Worker;
+package Server.Receiver.Channels.Shift;
 
-import Database.Dto.WorkerDTO;
-import Database.Implementation.WorkerDao;
+import Database.Dto.SearchShiftParametersDto;
+import Database.Dto.ShiftDTO;
+import Database.Implementation.ShiftDao;
 import Server.Receiver.Implementations.MessageHeaders.MessageHeader;
 import Server.Receiver.Implementations.Sender;
 import Server.Receiver.Interfaces.IQueue;
@@ -15,10 +16,12 @@ import com.rabbitmq.client.DeliverCallback;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeoutException;
 
-public class GetWorkerById implements IQueue {
+public class GetShiftBySearchParameters implements IQueue {
     private String Queue;
     private String Exchane;
     private Connection connection;
@@ -32,11 +35,11 @@ public class GetWorkerById implements IQueue {
     private boolean autoDelete;
     private Map<String,Object> map;
 
-    public GetWorkerById(String queue, String exchane) {
+    public GetShiftBySearchParameters(String queue, String exchane) {
         MQConfig mqConfig = MQConfig.getInstance();
 
         // ---------------------------------------------
-        action = "GetWorkerById";
+        action = "GetShiftBySearchParameters";
         // ---------------------------------------------
 
         this.Queue = queue;
@@ -102,19 +105,18 @@ public class GetWorkerById implements IQueue {
                     String Payload = ow.writeValueAsString(messageHeader.payload);
 
                     //string => object
-                    Object object = mapper.readValue(Payload, Integer.class);
+                    Object object = mapper.readValue(Payload, SearchShiftParametersDto.class);
 
                     //---------------------------------------------
                     //cast til det object der skal bruges
-                    int workerId = (int) object;
+                    SearchShiftParametersDto dto = (SearchShiftParametersDto) object;
 
                     //skriv til dao/DB
-                    WorkerDao workerDao = WorkerDao.getInstance();
-                    WorkerDTO workerDTO = workerDao.GetWorker(workerId);
-
+                    ShiftDao shiftDao = ShiftDao.getInstance();
+                    ArrayList<ShiftDTO> shifts = shiftDao.getBySearchParameters(dto.date, dto.workerName);
 
                     Sender sender = Sender.getInstance();
-                    sender.send(new MessageHeader(messageHeader.getQueue(), action, workerDTO));
+                    sender.send(new MessageHeader(messageHeader.getQueue(), action, shifts));
                     //---------------------------------------------
                 };
                 channel.basicConsume(Queue, true, deliverCallback, consumerTag -> {
@@ -125,4 +127,7 @@ public class GetWorkerById implements IQueue {
         }
 
     }
+
+
+
 }

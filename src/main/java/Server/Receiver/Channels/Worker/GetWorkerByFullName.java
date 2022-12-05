@@ -18,7 +18,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import java.util.concurrent.TimeoutException;
 
-public class GetWorkerById implements IQueue {
+public class GetWorkerByFullName implements IQueue {
+
     private String Queue;
     private String Exchane;
     private Connection connection;
@@ -32,11 +33,11 @@ public class GetWorkerById implements IQueue {
     private boolean autoDelete;
     private Map<String,Object> map;
 
-    public GetWorkerById(String queue, String exchane) {
+    public GetWorkerByFullName(String queue, String exchane) {
         MQConfig mqConfig = MQConfig.getInstance();
 
         // ---------------------------------------------
-        action = "GetWorkerById";
+        action = "GetWorkerByFullName";
         // ---------------------------------------------
 
         this.Queue = queue;
@@ -102,15 +103,15 @@ public class GetWorkerById implements IQueue {
                     String Payload = ow.writeValueAsString(messageHeader.payload);
 
                     //string => object
-                    Object object = mapper.readValue(Payload, Integer.class);
+                    Object object = mapper.readValue(Payload, String.class);
 
                     //---------------------------------------------
                     //cast til det object der skal bruges
-                    int workerId = (int) object;
+                    String fullName = (String) object;
 
                     //skriv til dao/DB
                     WorkerDao workerDao = WorkerDao.getInstance();
-                    WorkerDTO workerDTO = workerDao.GetWorker(workerId);
+                    WorkerDTO workerDTO = workerDao.GetWorkerByFullName(fullName);
 
 
                     Sender sender = Sender.getInstance();
@@ -125,4 +126,5 @@ public class GetWorkerById implements IQueue {
         }
 
     }
+
 }

@@ -40,8 +40,10 @@ public class Sender {
             ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
             String message = ow.writeValueAsString(payload);
 
+            System.out.println(payload.queue);
+            System.out.println("sended: " + payload.payload.toString());
+
             channel.basicPublish("", queueName, null, message.getBytes(StandardCharsets.UTF_8));
-            System.out.println("sended: " + payload.toString());
         } catch (IOException e) {
             throw new RuntimeException(e);
         } catch (TimeoutException e) {

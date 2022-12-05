@@ -1,5 +1,6 @@
 package Server.Receiver.Channels.Worker;
 
+import Database.Dto.SearchWorkerParametersDto;
 import Database.Dto.WorkerDTO;
 import Database.Implementation.WorkerDao;
 import Server.Receiver.Implementations.MessageHeaders.MessageHeader;
@@ -15,10 +16,12 @@ import com.rabbitmq.client.DeliverCallback;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.concurrent.TimeoutException;
 
-public class GetWorkerById implements IQueue {
+public class GetWorkerBySearchParameters implements IQueue {
+
     private String Queue;
     private String Exchane;
     private Connection connection;
@@ -32,11 +35,11 @@ public class GetWorkerById implements IQueue {
     private boolean autoDelete;
     private Map<String,Object> map;
 
-    public GetWorkerById(String queue, String exchane) {
+    public GetWorkerBySearchParameters(String queue, String exchane) {
         MQConfig mqConfig = MQConfig.getInstance();
 
         // ---------------------------------------------
-        action = "GetWorkerById";
+        action = "GetWorkerBySearchParameters";
         // ---------------------------------------------
 
         this.Queue = queue;
@@ -101,20 +104,20 @@ public class GetWorkerById implements IQueue {
                     // Json => string
                     String Payload = ow.writeValueAsString(messageHeader.payload);
 
-                    //string => object
-                    Object object = mapper.readValue(Payload, Integer.class);
-
                     //---------------------------------------------
+                    //string => object
+                    Object object = mapper.readValue(Payload, SearchWorkerParametersDto.class);
+
                     //cast til det object der skal bruges
-                    int workerId = (int) object;
+                    SearchWorkerParametersDto dto = (SearchWorkerParametersDto) object;
 
                     //skriv til dao/DB
                     WorkerDao workerDao = WorkerDao.getInstance();
-                    WorkerDTO workerDTO = workerDao.GetWorker(workerId);
+                    ArrayList<WorkerDTO> workerDTOs = workerDao.getBySearchParameters(dto.workerName);
 
 
                     Sender sender = Sender.getInstance();
-                    sender.send(new MessageHeader(messageHeader.getQueue(), action, workerDTO));
+                    sender.send(new MessageHeader(messageHeader.getQueue(), action, workerDTOs));
                     //---------------------------------------------
                 };
                 channel.basicConsume(Queue, true, deliverCallback, consumerTag -> {
