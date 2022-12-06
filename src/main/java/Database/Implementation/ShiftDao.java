@@ -132,7 +132,6 @@ public class ShiftDao implements IShiftDao
             // # Convert from Worker (Entity) to WorkerDTO
             ArrayList<ShiftsEntity> shiftsEntity = (ArrayList<ShiftsEntity>) GetAllShifts.getResultList(); // Extract the worker from the result set
 
-            System.out.println(shiftsEntity.get(0));
             // < Convert to DTOs
             for (ShiftsEntity shift: shiftsEntity)
             {
