@@ -218,7 +218,7 @@ public class WorkerDao implements IWorkerDao
         {
             for (WorkerDTO worker: allWorkers)
             {
-                if(worker.firstName.toLowerCase().contains(fullName) | worker.lastName.toLowerCase().contains(fullName))
+                if(worker.firstName.toLowerCase().contains(fullName.toLowerCase()) | worker.lastName.toLowerCase().contains(fullName.toLowerCase()))
                 {
                     result.add(worker);
                 }
@@ -228,7 +228,7 @@ public class WorkerDao implements IWorkerDao
         {
             for (WorkerDTO worker:allWorkers)
             {
-                if(worker.firstName.toLowerCase().contains(fullName))
+                if(worker.getFullname().toLowerCase().contains(fullName.toLowerCase()))
                 {
                     result.add(worker);
                 }
