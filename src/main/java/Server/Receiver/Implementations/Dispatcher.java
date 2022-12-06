@@ -88,7 +88,7 @@ public class Dispatcher implements IDispatcher
                     DeliverCallback deliverCallback = (consumerTag, delivery) -> {
                         String message = new String(delivery.getBody(), StandardCharsets.UTF_8);
 
-                        System.out.println(" [Dispatcher] Received '" + message + "'");
+                        System.out.println("[Dispatcher] Received '" + message + "'");
                         startOperation(message);
 
                     };

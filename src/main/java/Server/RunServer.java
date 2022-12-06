@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public class RunServer {
     public static void main(String[] args) {
 
+
         ArrayList<IQueue> arrayList = new ArrayList<>();
         //Create
         arrayList.add(new CreateWorker("CreateWorker", ""));
