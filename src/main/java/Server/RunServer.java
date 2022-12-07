@@ -39,6 +39,11 @@ public class RunServer {
         arrayList.add(new GetWorkerBySearchParameters("GetWorkerBySearchParameters", ""));
         arrayList.add(new GetShiftBySearchParameters("GetShiftBySearchParameters", ""));
 
+        //bulk
+        arrayList.add(new CreateShifts("CreateShifts", ""));
+        arrayList.add(new EditShifts("EditShifts", ""));
+        arrayList.add(new RemoveShifts("RemoveShifts", ""));
+
         //Test
         arrayList.add(new TestChannel("Test", ""));
 

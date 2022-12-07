@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3cf24cbd-2f25-49c3-b1f4-7e01252d6f3b" name="Changes" comment="fixed GetAllShifts in ShiftDao.java (didn't work when workShif.size = 0)">
+    <list default="true" id="3cf24cbd-2f25-49c3-b1f4-7e01252d6f3b" name="Changes" comment="sout is now only received and Send">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/Receiver/Implementations/Sender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Receiver/Implementations/Sender.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Server/RunServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/RunServer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,21 +56,21 @@
     <option name="showVisibilityIcons" value="true" />
     <option name="sortByType" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Application.RunServer">
     <configuration name="RunServer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Server.RunServer" />
@@ -135,7 +135,8 @@
       <workItem from="1670165309596" duration="728000" />
       <workItem from="1670233506821" duration="17625000" />
       <workItem from="1670263215272" duration="2942000" />
-      <workItem from="1670318183178" duration="11189000" />
+      <workItem from="1670318183178" duration="13648000" />
+      <workItem from="1670405867067" duration="6429000" />
     </task>
     <task id="LOCAL-00001" summary="+ SearchParameters method for Worker and Shift&#10;+ GetAllWorkers&#10;+ GetAllShifts&#10;+ GetWorkerByFullName">
       <created>1669970557465</created>
@@ -179,7 +180,14 @@
       <option name="project" value="LOCAL" />
       <updated>1670330524248</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="sout is now only received and Send">
+      <created>1670333951438</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1670333951438</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -202,6 +210,7 @@
     <MESSAGE value="fix update (didn't update breakamount)" />
     <MESSAGE value="fixed getBySearchParameters in WorkerDao (didn't compare fullName with input)" />
     <MESSAGE value="fixed GetAllShifts in ShiftDao.java (didn't work when workShif.size = 0)" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed GetAllShifts in ShiftDao.java (didn't work when workShif.size = 0)" />
+    <MESSAGE value="sout is now only received and Send" />
+    <option name="LAST_COMMIT_MESSAGE" value="sout is now only received and Send" />
   </component>
 </project>
