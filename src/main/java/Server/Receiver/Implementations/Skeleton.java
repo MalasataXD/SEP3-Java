@@ -16,7 +16,7 @@ public class Skeleton implements ISkeleton
 
     private IQueue findQueue(String queue) {
         for (IQueue iQueue : queues) {
-            if (iQueue.GetQueue().equalsIgnoreCase(queue)) {
+            if (iQueue.getQueue().equalsIgnoreCase(queue)) {
                 return iQueue;
             }
         }

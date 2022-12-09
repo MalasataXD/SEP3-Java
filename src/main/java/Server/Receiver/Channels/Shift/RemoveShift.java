@@ -1,8 +1,6 @@
 package Server.Receiver.Channels.Shift;
 
-import Database.Dto.WorkerDTO;
 import Database.Implementation.ShiftDao;
-import Database.Implementation.WorkerDao;
 import Server.Receiver.Implementations.MessageHeaders.MessageHeader;
 import Server.Receiver.Interfaces.IQueue;
 import Server.Receiver.MQConfig;
@@ -20,31 +18,34 @@ import java.util.concurrent.TimeoutException;
 
 public class RemoveShift implements IQueue {
 
-    // < Fields
-    private String Queue;
-    private String Exchane;
+    // # Fields
+
+    // RabbitMQ Setup
+    private String queue;
+    private String exchange;
     private Connection connection;
     private Channel channel;
-
     private String URL;
-
-    private String action;
     private boolean durable;
     private boolean exclusive;
     private boolean autoDelete;
+
+    // Action
+    private String action;
     private Map<String,Object> map;
 
-    public RemoveShift(String queue, String exchane) {
+    // ¤ Constructor
+    public RemoveShift(String queue, String exchange) {
         MQConfig mqConfig = MQConfig.getInstance();
-
+        // ¤ Returns action, this handles.
         // ---------------------------------------------
         action = "RemoveShift";
         // ---------------------------------------------
 
-        this.Queue = queue;
-        Exchane = exchane;
+        this.queue = queue;
+        this.exchange = exchange;
 
-        //from config
+        //Get from config
         URL = mqConfig.getURL();
         durable = mqConfig.isDurable();
         exclusive = mqConfig.isExclusive();
@@ -65,57 +66,56 @@ public class RemoveShift implements IQueue {
 
     }
 
-    @Override
-    public String GetQueue() {
-        return Queue;
+    // ¤ Returns action, this handles
+    @Override public String getQueue() {
+        return queue;
     }
-
-    @Override
-    public void run() {
+    @Override public void run() {
         int count = 0;
 
         try {
-            count = channel.queueDeclarePassive(Queue).getMessageCount();
+            count = channel.queueDeclarePassive(queue).getMessageCount();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
         while (count != 0) {
             count--;
-            try {
+            try
+            {
+                // ¤ RabbitMQ setup
                 ConnectionFactory factory = new ConnectionFactory();
                 factory.setHost(URL);
                 Connection connection = factory.newConnection();
                 Channel channel = connection.createChannel();
 
-                channel.queueDeclare(Queue, durable, exclusive, autoDelete, map);
+                // Declare the queue, so we can use it.
+                channel.queueDeclare(queue, durable, exclusive, autoDelete, map);
 
-                DeliverCallback deliverCallback = (consumerTag, delivery) -> {
+                DeliverCallback deliverCallback = (consumerTag, delivery) ->
+                {
                     String message = new String(delivery.getBody(), StandardCharsets.UTF_8);
 
-                    // Json med info til at lave messageHeader => obj af messageHeader
+                    // Get the json with the info, to make a messageheader
                     ObjectMapper mapper = new ObjectMapper();
                     MessageHeader messageHeader = mapper.readValue(message,MessageHeader.class);
 
-                    // payload er i "Test" => Json
+                    // Convert Json to make Messageheader
                     ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
 
-                    // Json => string
+                    // Get the payload of the messageheader
                     String Payload = ow.writeValueAsString(messageHeader.payload);
-
-                    //string => object
-                    Object object = mapper.readValue(Payload, Integer.class);
-
                     //---------------------------------------------
                     //cast til det object der skal bruges
+                    Object object = mapper.readValue(Payload, Integer.class);
                     int shiftId = (int) object;
 
-                    //skriv til dao/DB
+                    // Delete to Database using Dao.
                     ShiftDao shiftDao = ShiftDao.getInstance();
                     shiftDao.DeleteShift(shiftId);
                     //---------------------------------------------
                 };
-                channel.basicConsume(Queue, true, deliverCallback, consumerTag -> {
+                channel.basicConsume(queue, true, deliverCallback, consumerTag -> {
                 });
             } catch (IOException | TimeoutException e) {
                 throw new RuntimeException(e);
