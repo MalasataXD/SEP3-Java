@@ -81,7 +81,7 @@ public class ShiftDao implements IShiftDao
         EntityManager manager = factory.createEntityManager();
         EntityTransaction transaction = manager.getTransaction();
 
-        ShiftDTO foundShift;
+        ShiftDTO foundShift = null;
         try
         {
             // * Start the transaction
@@ -91,8 +91,12 @@ public class ShiftDao implements IShiftDao
             ShiftById.setParameter(1,id);
 
             // # Convert from Shift (Entity) to ShiftDTO
-            ShiftsEntity foundInDatabase = ShiftById.getSingleResult(); // Extract the shift from the result set.
-            foundShift = EntityConverter.toDTO(foundInDatabase);
+            if(ShiftById.getSingleResult() != null)
+            {
+                ShiftsEntity foundInDatabase = ShiftById.getSingleResult(); // Extract the shift from the result set.
+                foundShift = EntityConverter.toDTO(foundInDatabase);
+            }
+
 
             // * End the transaction
             transaction.commit();

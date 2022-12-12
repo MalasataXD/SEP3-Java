@@ -78,7 +78,7 @@ public class WorkerDao implements IWorkerDao
         EntityManager manager = factory.createEntityManager();
         EntityTransaction transaction = manager.getTransaction();
 
-        WorkerDTO foundWorker;
+        WorkerDTO foundWorker = null;
         try
         {
             // * Start the transaction
@@ -89,8 +89,11 @@ public class WorkerDao implements IWorkerDao
             WorkerById.setParameter(1, id);
 
             // # Convert from Worker (Entity) to WorkerDTO
-            WorkerEntity foundInDatabase = WorkerById.getSingleResult(); // Extract the worker from the result set
-            foundWorker = EntityConverter.toDTO(foundInDatabase);
+            if(WorkerById.getSingleResult() != null)
+            {
+                WorkerEntity foundInDatabase = WorkerById.getSingleResult(); // Extract the worker from the result set
+                foundWorker = EntityConverter.toDTO(foundInDatabase);
+            }
 
             // * End the transaction
             transaction.commit();
