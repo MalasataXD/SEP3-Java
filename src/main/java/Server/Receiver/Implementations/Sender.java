@@ -40,7 +40,12 @@ public class Sender {
             ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
             String message = ow.writeValueAsString(payload);
 
-            System.out.println("[Sender] Payload to send: " + payload.payload.toString() + " Method: " + payload.action + " send to " + payload.queue);
+            if (payload.payload == null){
+                System.out.println("[Sender] Payload to send: " + "null" + " Method: " + payload.action + " send to " + payload.queue);
+
+            } else {
+                System.out.println("[Sender] Payload to send: " + payload.payload.toString() + " Method: " + payload.action + " send to " + payload.queue);
+            }
 
             channel.basicPublish("", queueName, null, message.getBytes(StandardCharsets.UTF_8));
         } catch (IOException e) {

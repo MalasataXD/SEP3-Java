@@ -5,31 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3cf24cbd-2f25-49c3-b1f4-7e01252d6f3b" name="Changes" comment="sout is now only received and Send">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_02-12-2022_11_24_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_02-12-2022_11_24__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/Receiver/Channels/Shift/CreateShift.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Receiver/Channels/Shift/CreateShift.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/Receiver/Channels/Shift/CreateShifts.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Receiver/Channels/Shift/CreateShifts.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/Receiver/Channels/Shift/EditShift.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Receiver/Channels/Shift/EditShift.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/Receiver/Channels/Shift/EditShifts.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Receiver/Channels/Shift/EditShifts.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/Receiver/Channels/Shift/GetShiftById.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Receiver/Channels/Shift/GetShiftById.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/Receiver/Channels/Shift/GetShiftBySearchParameters.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Receiver/Channels/Shift/GetShiftBySearchParameters.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/Receiver/Channels/Shift/RemoveShift.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Receiver/Channels/Shift/RemoveShift.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/Receiver/Channels/Shift/RemoveShifts.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Receiver/Channels/Shift/RemoveShifts.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/Receiver/Channels/TestChannel.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/Receiver/Channels/Worker/CreateWorker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Receiver/Channels/Worker/CreateWorker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/Receiver/Channels/Worker/EditWorker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Receiver/Channels/Worker/EditWorker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/Receiver/Channels/Worker/GetWorkerByFullName.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Receiver/Channels/Worker/GetWorkerByFullName.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Database/Implementation/ShiftDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Database/Implementation/ShiftDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Database/Implementation/WorkerDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Database/Implementation/WorkerDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Server/Receiver/Channels/Worker/GetWorkerById.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Receiver/Channels/Worker/GetWorkerById.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/Receiver/Channels/Worker/GetWorkerBySearchParameters.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Receiver/Channels/Worker/GetWorkerBySearchParameters.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/Receiver/Channels/Worker/RemoveWorker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Receiver/Channels/Worker/RemoveWorker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/Receiver/Implementations/Skeleton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Receiver/Implementations/Skeleton.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/Receiver/Interfaces/IDispatcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Receiver/Interfaces/IDispatcher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/Receiver/Interfaces/IQueue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Receiver/Interfaces/IQueue.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/Receiver/Interfaces/ISkeleton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Receiver/Interfaces/ISkeleton.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/RunServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/RunServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Server/Receiver/Implementations/Sender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Receiver/Implementations/Sender.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,22 +60,22 @@
     <option name="showVisibilityIcons" value="true" />
     <option name="sortByType" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors.Rainbow Brackets",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors.Rainbow Brackets&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Application.RunServer">
     <configuration name="RunServer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Server.RunServer" />

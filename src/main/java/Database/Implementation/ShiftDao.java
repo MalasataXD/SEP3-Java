@@ -91,7 +91,7 @@ public class ShiftDao implements IShiftDao
             ShiftById.setParameter(1,id);
 
             // # Convert from Shift (Entity) to ShiftDTO
-            if(ShiftById.getSingleResult() != null)
+            if(!ShiftById.getResultList().isEmpty())
             {
                 ShiftsEntity foundInDatabase = ShiftById.getSingleResult(); // Extract the shift from the result set.
                 foundShift = EntityConverter.toDTO(foundInDatabase);

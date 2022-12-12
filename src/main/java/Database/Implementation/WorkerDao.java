@@ -77,24 +77,21 @@ public class WorkerDao implements IWorkerDao
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("default");
         EntityManager manager = factory.createEntityManager();
         EntityTransaction transaction = manager.getTransaction();
-
+        System.out.println("test1");
         WorkerDTO foundWorker = null;
         try
         {
             // * Start the transaction
             transaction.begin();
-
             // * Search for worker in database
             TypedQuery<WorkerEntity> WorkerById = manager.createNamedQuery("Worker.ById", WorkerEntity.class);
             WorkerById.setParameter(1, id);
-
             // # Convert from Worker (Entity) to WorkerDTO
-            if(WorkerById.getSingleResult() != null)
+            if(!WorkerById.getResultList().isEmpty())
             {
                 WorkerEntity foundInDatabase = WorkerById.getSingleResult(); // Extract the worker from the result set
                 foundWorker = EntityConverter.toDTO(foundInDatabase);
             }
-
             // * End the transaction
             transaction.commit();
         }
