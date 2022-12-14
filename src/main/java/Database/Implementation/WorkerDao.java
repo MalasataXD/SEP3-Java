@@ -77,7 +77,6 @@ public class WorkerDao implements IWorkerDao
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("default");
         EntityManager manager = factory.createEntityManager();
         EntityTransaction transaction = manager.getTransaction();
-        System.out.println("test1");
         WorkerDTO foundWorker = null;
         try
         {
